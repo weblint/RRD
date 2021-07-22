@@ -1,0 +1,150 @@
+# The command is escaped for Linux bash
+#http://rrdwizard.appspot.com/rrdcreate.php?
+#----------------------------------------------
+
+rrdtool graph 'blx.png' \
+--title 'Tmperatur' \
+--vertical-label 'd' \
+--width '400' \
+--height '100' \
+--start end-1d \
+'DEF:BLX1=db.rrd:1:AVERAGE' \
+'DEF:BLX2=db.rrd:2:AVERAGE' \
+'DEF:BLX3=db.rrd:3:AVERAGE' \
+'DEF:BLX4=db.rrd:4:AVERAGE' \
+'DEF:BLX5=db.rrd:5:AVERAGE' \
+'DEF:BLX6=db.rrd:6:AVERAGE' \
+'DEF:BLX7=db.rrd:7:AVERAGE' \
+'DEF:BLX8=db.rrd:8:AVERAGE' \
+'DEF:BLX9=db.rrd:9:AVERAGE' \
+'DEF:BLX10=db.rrd:10:AVERAGE' \
+'CDEF:d1=' \
+'CDEF:d2=' \
+'CDEF:d3=' \
+'CDEF:d4=' \
+'CDEF:d5=' \
+'CDEF:d6=' \
+'CDEF:d7=' \
+'CDEF:d8=' \
+'CDEF:d9=' \
+'CDEF:d10=' \
+'AREA:BLX1#FFCC00:1' \
+'AREA:BLX2#FF9900:2' \
+'AREA:BLX3#CC9900:3' \
+'AREA:BLX4#999900:4' \
+'AREA:BLX5#669900:5' \
+'AREA:BLX6#00FF00:6' \
+'AREA:BLX7#CCFF00:7' \
+'AREA:BLX8#FFFF00:8' \
+'AREA:BLX9#33FFFF:9' \
+'AREA:BLX10#CCFFFF:10' \
+'LINE1:d1#000000' \
+'LINE2:d2#000000' \
+'LINE3:d3#000000' \
+'LINE4:d4#000000' \
+'LINE5:d5#000000' \
+'LINE6:d6#000000' \
+'LINE7:d7#000000' \
+'LINE8:d8#000000' \
+'LINE9:d9#000000' \
+'LINE10:d10#000000'
+------------------------------------
+rrdtool create BLX.rrd \
+--step '60' \
+'DS:B1:GAUGE:180:-70:+70' \
+'DS:B2:GAUGE:180:-70:+70' \
+'DS:B3:GAUGE:180:-70:+70' \
+'DS:B4:GAUGE:180:-70:+70' \
+'DS:B5:GAUGE:180:-70:+70' \
+'DS:B6:GAUGE:180:-70:+70' \
+'DS:B7:GAUGE:180:-70:+70' \
+'DS:B8:GAUGE:180:-70:+70' \
+'DS:B9:GAUGE:180:-70:+70' \
+'DS:B10:GAUGE:180:-70:+70' \
+'RRA:AVERAGE:0.5:3:1' \
+'RRA:AVERAGE:0.5:3:1' \
+'RRA:AVERAGE:0.5:3:1' \
+'RRA:AVERAGE:0.5:3:1' \
+'RRA:AVERAGE:0.5:3:1' \
+'RRA:AVERAGE:0.5:3:1' \
+'RRA:AVERAGE:0.5:3:1' \
+'RRA:AVERAGE:0.5:3:1' \
+'RRA:AVERAGE:0.5:3:1' \
+'RRA:AVERAGE:0.5:3:1'
+
+#-------------------------------------------------
+#RRD mit 4 Messwerten
+rrdtool create filename.rrd \
+--step '600' \
+'DS:t1:GAUGE:600:-70:+70' \
+'DS:t2:GAUGE:600:-70:+70' \
+'DS:t3:GAUGE:600:-70:+70' \
+'DS:t4:GAUGE:600:-70:+70' \
+'RRA:AVERAGE:0.5:300:1'
+
+#-- mit mehr Mittelwert Tiefen
+rrdtool create filename.rrd \
+--step '600' \
+'DS:t1:GAUGE:600:-70:+70' \
+'DS:t2:GAUGE:600:-70:+70' \
+'DS:t3:GAUGE:600:-70:+70' \
+'DS:t4:GAUGE:600:-70:+70' \
+'RRA:AVERAGE:0.5:300:1' \
+'RRA:AVERAGE:0.5:1:1' \
+'RRA:AVERAGE:0.5:3:1' \
+'RRA:AVERAGE:0.5:7:1' \
+'RRA:AVERAGE:0.5:9:1' \
+'RRA:AVERAGE:0.5:15:1' \
+'RRA:AVERAGE:0.5:25:1' \
+'RRA:AVERAGE:0.5:30:1' \
+'RRA:AVERAGE:0.5:40:1' \
+'RRA:AVERAGE:0.5:50:1'
+
+#--
+# The command is escaped for Linux bash
+
+rrdtool graph 'graph.png' \
+--width '400' \
+--height '100' \
+--start end-1y \
+'DEF:d1=db.rrd:t1:AVERAGE' \
+'DEF:d2=db.rrd:t2:AVERAGE' \
+'DEF:d3=db.rrd:t3:AVERAGE' \
+'DEF:d4=db.rrd:t4:AVERAGE' \
+'CDEF:1=' \
+'CDEF:2=' \
+'CDEF:3=' \
+'CDEF:4=' \
+'VDEF:A=d1,LAST' \
+'VRULE:A#0099CC' \
+'VDEF:B=d2,LAST' \
+'VRULE:B#009999' \
+'VDEF:C=d3,LAST' \
+'VRULE:C#009966' \
+'VDEF:D=d4,LAST' \
+'VRULE:D#009900' \
+'AREA:d1#00FFFF' \
+'AREA:d2#33FF66' \
+'AREA:d3#CCFF33' \
+'AREA:d4#CCCC66'
+
+#--------------------------------
+#-- 2 Messwerten
+rrdtool create filename.rrd \
+--step '120' \
+'DS:1:GAUGE:120:-70:+70' \
+'DS:2:GAUGE:120:-70:+70' \
+'RRA:AVERAGE:0.5:30:1' \
+'RRA:AVERAGE:0.5:30:1'
+
+#--
+# The command is escaped for Linux bash
+
+rrdtool graph 'graph.png' \
+--width '400' \
+--height '100' \
+--start end-1d \
+'DEF:M1=db.rrd:1:AVERAGE' \
+'DEF:M2=db.rrd:1:AVERAGE' \
+'AREA:M1#000000:T1' \
+'AREA:M2#006666:T2'
